@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Екатерина Илларионова](https://up.htmlacademy.ru/ecmascript-individual/2/user/2234315).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Хабиров](https://htmlacademy.ru/profile/alex_khab).
 
 ---
 
