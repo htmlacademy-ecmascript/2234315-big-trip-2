@@ -1,0 +1,3 @@
+const POINTS_QUANTITY = 3;
+
+export { POINTS_QUANTITY };
