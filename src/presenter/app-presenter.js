@@ -29,7 +29,11 @@ export default class AppPresenter {
     for (let i = 0; i < this.points.length; i++) {
       const pointsListItemComponent = new PointsListItemView();
       render(pointsListItemComponent, this.pointsListComponent.getElement());
-      render(new PointView ({point: this.points[i]}), pointsListItemComponent.getElement());
+      render(new PointView ({
+        point: this.points[i],
+        offers: [...this.pointModel.getOffersById(this.points[i].type, this.points[i].offers)],
+        destination: this.pointModel.getDestinationById(this.points[i].destination)
+      }), pointsListItemComponent.getElement());
     }
   }
 }
