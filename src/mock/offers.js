@@ -5,22 +5,22 @@ const mockOffers = [
     type: 'taxi',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa31',
+        id: '11',
         title: 'Upgrade to a business class',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa32',
+        id: '12',
         title: 'Child seat',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa33',
+        id: '13',
         title: 'Extra stops',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa34',
+        id: '14',
         title: 'Luggage assistance',
         price: getRandomInteger(100)
       }
@@ -30,17 +30,17 @@ const mockOffers = [
     type: 'bus',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa41',
+        id: '21',
         title: 'Wi-Fi',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa42',
+        id: '22',
         title: 'Extra baggage',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa43',
+        id: '23',
         title: 'Complimentary snacks and drinks',
         price: getRandomInteger(100)
       }
@@ -50,27 +50,27 @@ const mockOffers = [
     type: 'train',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa51',
+        id: '31',
         title: 'Wi-Fi',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa52',
+        id: '32',
         title: 'Complimentary snacks and drinks',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa53',
+        id: '33',
         title: 'Priority boarding',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa54',
+        id: '34',
         title: 'Meal service',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa55',
+        id: '35',
         title: 'In-seat power outlet',
         price: getRandomInteger(100)
       }
@@ -80,12 +80,12 @@ const mockOffers = [
     type: 'ship',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa61',
+        id: '41',
         title: 'Meal service',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa62',
+        id: '42',
         title: 'Spa Access',
         price: getRandomInteger(100)
       }
@@ -99,22 +99,22 @@ const mockOffers = [
     type: 'flight',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa71',
+        id: '51',
         title: 'Meal service',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa72',
+        id: '52',
         title: 'Extra legroom',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa73',
+        id: '53',
         title: 'Priority boarding',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa74',
+        id: '54',
         title: 'Extra baggage',
         price: getRandomInteger(100)
       }
@@ -124,27 +124,27 @@ const mockOffers = [
     type: 'check-in',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa81',
+        id: '61',
         title: 'Early check-in',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa82',
+        id: '62',
         title: 'Late check-out',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa83',
+        id: '63',
         title: 'Room upgrade',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa84',
+        id: '64',
         title: 'Breakfast included',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa85',
+        id: '65',
         title: 'Ocean view',
         price: getRandomInteger(100)
       }
@@ -154,12 +154,12 @@ const mockOffers = [
     type: 'sightseeing',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa91',
+        id: '71',
         title: 'Guided Tour',
         price: getRandomInteger(100)
       },
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa92',
+        id: '72',
         title: 'Audio Guide',
         price: getRandomInteger(100)
       }
@@ -169,7 +169,7 @@ const mockOffers = [
     type: 'restaurant',
     offers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa21',
+        id: '81',
         title: 'Chef\'s Tasting Menu',
         price: getRandomInteger(100)
       }

@@ -7,13 +7,26 @@ function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+function getRandomArrayElements(array, count) {
+  const arrayCopy = [...array];
+
+  if (array.length === 0 || count > array.length) {
+    return [];
+  }
+
+  for (let i = arrayCopy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
+  }
+
+  return arrayCopy.slice(0, count);
+}
+
 function getRandomInteger(max) {
   return Math.floor(Math.random() * max);
 }
 
-function getRandomBool(probability) {
-  return Math.random() < probability;
-}
+const getRandomDate = (start, end) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
@@ -36,4 +49,4 @@ function getDuration(startDate, endDate) {
   return dayjs(dayjs.duration({ minutes: dateDuration }).$ms).format(format);
 }
 
-export {getRandomArrayElement, getRandomInteger, getRandomBool, humanizeDate, getDuration};
+export { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, humanizeDate, getDuration };

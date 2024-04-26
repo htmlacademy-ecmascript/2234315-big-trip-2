@@ -1,9 +1,9 @@
-import {DATE_FORMAT} from '../const';
-import {createElement} from '../render.js';
-import {humanizeDate, getDuration} from '../utils.js';
+import { DATE_FORMAT } from '../const';
+import { createElement } from '../render.js';
+import { humanizeDate, getDuration } from '../utils.js';
 
 function createOfferTemplate(offer) {
-  const {title, price} = offer;
+  const { title, price } = offer;
   return (
     `<li class="event__offer">
         <span class="event__offer-title">${title}</span>
@@ -14,11 +14,11 @@ function createOfferTemplate(offer) {
 }
 
 function createPointTemplate(point, offers, destinations) {
-  const {dateFrom, dateTo, basePrice, isFavorite, type} = point;
+  const { dateFrom, dateTo, basePrice, isFavorite, type } = point;
   const pointTypeOffers = offers.find((offer) => offer.type === point.type).offers;
   const pointOffers = pointTypeOffers.filter((pointTypeOffer) => point.offers.includes(pointTypeOffer.id));
   const pointDestination = destinations.find((destination) => destination.id === point.destination);
-  const {name} = pointDestination;
+  const { name } = pointDestination;
 
   return (
     `<div class="event">
@@ -33,7 +33,7 @@ function createPointTemplate(point, offers, destinations) {
           &mdash;
           <time class="event__end-time" datetime="${dateTo}">${humanizeDate(dateTo, DATE_FORMAT.time)}</time>
         </p>
-        <p class="event__duration">${getDuration(dateFrom,dateTo)}</p>
+        <p class="event__duration">${getDuration(dateFrom, dateTo)}</p>
       </div>
       <p class="event__price">
         &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
@@ -56,7 +56,7 @@ function createPointTemplate(point, offers, destinations) {
 }
 
 export default class PointView {
-  constructor({point, offers, destinations}) {
+  constructor({ point, offers, destinations }) {
     this.point = point;
     this.offers = offers;
     this.destinations = destinations;

@@ -4,7 +4,7 @@ import PointsListView from '../view/points-list-view.js';
 import PointsListItemView from '../view/points-list-item-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointView from '../view/point-view.js';
-import {render} from '../render.js';
+import { render } from '../render.js';
 
 const filterWrapper = document.querySelector('.trip-controls__filters');
 
@@ -12,7 +12,7 @@ export default class AppPresenter {
   pointsListComponent = new PointsListView();
   pointEditFormComponent = new PointsListItemView();
 
-  constructor({pointsListContainer, pointModel}) {
+  constructor({ pointsListContainer, pointModel }) {
     this.pointsListContainer = pointsListContainer;
     this.pointModel = pointModel;
   }
@@ -26,7 +26,7 @@ export default class AppPresenter {
     render(new SortView, this.pointsListContainer);
     render(this.pointsListComponent, this.pointsListContainer);
     render(this.pointEditFormComponent, this.pointsListComponent.getElement());
-    render(new PointEditView ({
+    render(new PointEditView({
       point: this.points[0],
       offers: this.offers,
       destinations: this.destinations
@@ -36,7 +36,7 @@ export default class AppPresenter {
       const pointsListItemComponent = new PointsListItemView();
 
       render(pointsListItemComponent, this.pointsListComponent.getElement());
-      render(new PointView ({
+      render(new PointView({
         point: this.points[i],
         offers: this.offers,
         destinations: this.destinations

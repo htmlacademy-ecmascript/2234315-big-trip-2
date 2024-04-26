@@ -1,8 +1,8 @@
-import {POINTS_TYPES, DATE_FORMAT} from '../const';
-import {createElement} from '../render.js';
-import {humanizeDate} from '../utils.js';
+import { POINTS_TYPES, DATE_FORMAT } from '../const';
+import { createElement } from '../render.js';
+import { humanizeDate } from '../utils.js';
 
-function createBlancPoint (pointTypes) {
+function createBlancPoint(pointTypes) {
 
   return {
     id: '',
@@ -27,7 +27,7 @@ function createPointTypeTemplate(pointType, currentPointType) {
 }
 
 function createDestinationTemplate(destination) {
-  const {name} = destination;
+  const { name } = destination;
 
   return (
     `<option value="${name}"></option>`
@@ -35,7 +35,7 @@ function createDestinationTemplate(destination) {
 }
 
 function createOfferTemplate(offer, selectedOffers) {
-  const {id, title, price} = offer;
+  const { id, title, price } = offer;
   const formatOfferTitle = (offerTitle) => offerTitle.toLowerCase().split(' ').join('-');
   const offerCheckedAttribute = selectedOffers.map((selectedOffer) => selectedOffer.id).includes(id) ? 'checked' : '';
 
@@ -52,7 +52,7 @@ function createOfferTemplate(offer, selectedOffers) {
 }
 
 function createPictureTemplate(picture) {
-  const {src, description} = picture;
+  const { src, description } = picture;
 
   return (
     `<img class="event__photo" src="${src}" alt="${description}">`
@@ -61,11 +61,11 @@ function createPictureTemplate(picture) {
 
 function createPointEditTemplate(point, offers, destinations) {
   const currentPoint = point ? point : createBlancPoint(POINTS_TYPES);
-  const {dateFrom, dateTo, basePrice, type} = currentPoint;
+  const { dateFrom, dateTo, basePrice, type } = currentPoint;
   const pointTypeOffers = offers.find((offer) => offer.type === currentPoint.type).offers;
   const pointOffers = pointTypeOffers.filter((pointTypeOffer) => currentPoint.offers.includes(pointTypeOffer.id));
   const pointDestination = destinations.find((destination) => destination.id === currentPoint.destination);
-  const {name, description, pictures} = pointDestination || {};
+  const { name, description, pictures } = pointDestination || {};
 
   return (
     `<form class="event event--edit" action="#" method="post">
@@ -144,7 +144,7 @@ function createPointEditTemplate(point, offers, destinations) {
 }
 
 export default class PointEditView {
-  constructor({point, offers, destinations}) {
+  constructor({ point, offers, destinations }) {
     this.point = point;
     this.offers = offers;
     this.destinations = destinations;
