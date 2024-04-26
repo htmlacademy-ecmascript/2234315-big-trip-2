@@ -19,20 +19,27 @@ export default class AppPresenter {
 
   init() {
     this.points = [...this.pointModel.getPoints()];
+    this.offers = [...this.pointModel.getOffers()];
+    this.destinations = [...this.pointModel.getDestinations()];
 
     render(new FilterView, filterWrapper);
     render(new SortView, this.pointsListContainer);
     render(this.pointsListComponent, this.pointsListContainer);
     render(this.pointEditFormComponent, this.pointsListComponent.getElement());
-    render(new PointEditView, this.pointEditFormComponent.getElement());
+    render(new PointEditView ({
+      point: this.points[0],
+      offers: this.offers,
+      destinations: this.destinations
+    }), this.pointEditFormComponent.getElement());
 
-    for (let i = 0; i < this.points.length; i++) {
+    for (let i = 1; i < this.points.length; i++) {
       const pointsListItemComponent = new PointsListItemView();
+
       render(pointsListItemComponent, this.pointsListComponent.getElement());
       render(new PointView ({
         point: this.points[i],
-        offers: [...this.pointModel.getOffersById(this.points[i].type, this.points[i].offers)],
-        destination: this.pointModel.getDestinationById(this.points[i].destination)
+        offers: this.offers,
+        destinations: this.destinations
       }), pointsListItemComponent.getElement());
     }
   }

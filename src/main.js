@@ -9,4 +9,5 @@ const appPresenter = new AppPresenter({
   pointModel
 });
 
+pointModel.init();
 appPresenter.init();
