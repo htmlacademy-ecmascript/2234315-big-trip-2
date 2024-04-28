@@ -1,12 +1,9 @@
-import FilterView from '../view/filter-view.js';
 import SortView from '../view/sort-view.js';
 import PointsListView from '../view/points-list-view.js';
 import PointsListItemView from '../view/points-list-item-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointView from '../view/point-view.js';
 import { render } from '../render.js';
-
-const filterWrapper = document.querySelector('.trip-controls__filters');
 
 export default class AppPresenter {
   pointsListComponent = new PointsListView();
@@ -22,7 +19,6 @@ export default class AppPresenter {
     this.offers = [...this.pointModel.getOffers()];
     this.destinations = [...this.pointModel.getDestinations()];
 
-    render(new FilterView, filterWrapper);
     render(new SortView, this.pointsListContainer);
     render(this.pointsListComponent, this.pointsListContainer);
     render(this.pointEditFormComponent, this.pointsListComponent.getElement());

@@ -28,6 +28,11 @@ function getRandomInteger(max) {
 
 const getRandomDate = (start, end) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
+function generateUUID() {
+  const hex = () => Math.floor(Math.random() * 0x10000).toString(16).padStart(4, '0');
+  return `${hex()}-${hex()}-${hex()}-${hex()}-${hex()}${hex()}`;
+}
+
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
 }
@@ -49,4 +54,4 @@ function getDuration(startDate, endDate) {
   return dayjs(dayjs.duration({ minutes: dateDuration }).$ms).format(format);
 }
 
-export { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, humanizeDate, getDuration };
+export { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, generateUUID, humanizeDate, getDuration };

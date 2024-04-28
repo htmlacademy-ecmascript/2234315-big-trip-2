@@ -1,5 +1,5 @@
 import { POINTS_TYPES } from '../const';
-import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate } from '../utils';
+import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, generateUUID } from '../utils';
 import { mockDestinations } from './destinations';
 import { mockOffers } from './offers';
 
@@ -15,6 +15,7 @@ const getRandomPoint = () => {
   const pointType = getRandomArrayElement(POINTS_TYPES);
 
   return ({
+    id: generateUUID(),
     basePrice: getRandomInteger(500),
     dateFrom: getRandomDate(new Date(2024, 4, 1), new Date(2024, 4, 5)),
     dateTo: getRandomDate(new Date(2024, 4, 5), new Date(2024, 4, 15)),
