@@ -1,26 +1,42 @@
-import SorterView from '../view/sorter-view.js';
+import SortView from '../view/sort-view.js';
 import PointsListView from '../view/points-list-view.js';
 import PointsListItemView from '../view/points-list-item-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointView from '../view/point-view.js';
-import {render} from '../render.js';
-
-const pointsListWrapper = document.querySelector('.trip-events');
+import { render } from '../render.js';
 
 export default class AppPresenter {
   pointsListComponent = new PointsListView();
   pointEditFormComponent = new PointsListItemView();
 
-  init() {
-    render(new SorterView, pointsListWrapper);
-    render(this.pointsListComponent, pointsListWrapper);
-    render(this.pointEditFormComponent, this.pointsListComponent.getElement());
-    render(new PointEditView, this.pointEditFormComponent.getElement());
+  constructor({ pointsListContainer, pointModel }) {
+    this.pointsListContainer = pointsListContainer;
+    this.pointModel = pointModel;
+  }
 
-    for (let i = 0; i < 3; i++) {
+  init() {
+    this.points = [...this.pointModel.getPoints()];
+    this.offers = [...this.pointModel.getOffers()];
+    this.destinations = [...this.pointModel.getDestinations()];
+
+    render(new SortView, this.pointsListContainer);
+    render(this.pointsListComponent, this.pointsListContainer);
+    render(this.pointEditFormComponent, this.pointsListComponent.getElement());
+    render(new PointEditView({
+      point: this.points[0],
+      offers: this.offers,
+      destinations: this.destinations
+    }), this.pointEditFormComponent.getElement());
+
+    for (let i = 1; i < this.points.length; i++) {
       const pointsListItemComponent = new PointsListItemView();
+
       render(pointsListItemComponent, this.pointsListComponent.getElement());
-      render(new PointView, pointsListItemComponent.getElement());
+      render(new PointView({
+        point: this.points[i],
+        offers: this.offers,
+        destinations: this.destinations
+      }), pointsListItemComponent.getElement());
     }
   }
 }
