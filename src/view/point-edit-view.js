@@ -1,5 +1,5 @@
 import { POINTS_TYPES, DATE_FORMAT } from '../const';
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils.js';
 
 function createBlankPoint(pointTypes) {
@@ -183,26 +183,19 @@ function createPointEditTemplate(point, offers, destinations) {
   );
 }
 
-export default class PointEditView {
+export default class PointEditView extends AbstractView {
+  #point = null;
+  #offers = null;
+  #destinations = null;
+
   constructor({ point, offers, destinations }) {
-    this.point = point;
-    this.offers = offers;
-    this.destinations = destinations;
+    super();
+    this.#point = point;
+    this.#offers = offers;
+    this.#destinations = destinations;
   }
 
-  getTemplate() {
-    return createPointEditTemplate(this.point, this.offers, this.destinations);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createPointEditTemplate(this.#point, this.#offers, this.#destinations);
   }
 }

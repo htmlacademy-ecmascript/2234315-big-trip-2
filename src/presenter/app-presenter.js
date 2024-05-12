@@ -3,7 +3,7 @@ import PointsListView from '../view/points-list-view.js';
 import PointsListItemView from '../view/points-list-item-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointView from '../view/point-view.js';
-import { render } from '../render.js';
+import { render } from '../framework/render.js';
 
 export default class AppPresenter {
   pointsListComponent = new PointsListView();
@@ -21,22 +21,22 @@ export default class AppPresenter {
 
     render(new SortView, this.pointsListContainer);
     render(this.pointsListComponent, this.pointsListContainer);
-    render(this.pointEditFormComponent, this.pointsListComponent.getElement());
+    render(this.pointEditFormComponent, this.pointsListComponent.element);
     render(new PointEditView({
       point: this.points[0],
       offers: this.offers,
       destinations: this.destinations
-    }), this.pointEditFormComponent.getElement());
+    }), this.pointEditFormComponent.element);
 
     for (let i = 1; i < this.points.length; i++) {
       const pointsListItemComponent = new PointsListItemView();
 
-      render(pointsListItemComponent, this.pointsListComponent.getElement());
+      render(pointsListItemComponent, this.pointsListComponent.element);
       render(new PointView({
         point: this.points[i],
         offers: this.offers,
         destinations: this.destinations
-      }), pointsListItemComponent.getElement());
+      }), pointsListItemComponent.element);
     }
   }
 }
