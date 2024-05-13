@@ -8,7 +8,6 @@ import { render, replace } from '../framework/render.js';
 export default class AppPresenter {
   #pointsListContainer = null;
   #pointModel = null;
-
   #pointsListComponent = new PointsListView();
 
   #points = [];
@@ -25,12 +24,7 @@ export default class AppPresenter {
     this.#offers = [...this.#pointModel.offers];
     this.#destinations = [...this.#pointModel.destinations];
 
-    render(new SortView, this.#pointsListContainer);
-    render(this.#pointsListComponent, this.#pointsListContainer);
-
-    for (let i = 1; i < this.#points.length; i++) {
-      this.#renderPoint(this.#points[i], this.#offers, this.#destinations);
-    }
+    this.#renderApp();
   }
 
   #renderPoint(point, offers, destinations) {
@@ -71,5 +65,14 @@ export default class AppPresenter {
 
     render(pointsListItemComponent, this.#pointsListComponent.element);
     render(pointComponent, pointsListItemComponent.element);
+  }
+
+  #renderApp() {
+    render(new SortView, this.#pointsListContainer);
+    render(this.#pointsListComponent, this.#pointsListContainer);
+
+    for (let i = 1; i < this.#points.length; i++) {
+      this.#renderPoint(this.#points[i], this.#offers, this.#destinations);
+    }
   }
 }
