@@ -9,10 +9,7 @@ export default class AppPresenter {
   #pointsListContainer = null;
   #pointModel = null;
   #pointsListComponent = new PointsListView();
-
   #points = [];
-  #offers = [];
-  #destinations = [];
 
   constructor({ pointsListContainer, pointModel }) {
     this.#pointsListContainer = pointsListContainer;
@@ -21,14 +18,13 @@ export default class AppPresenter {
 
   init() {
     this.#points = [...this.#pointModel.points];
-    this.#offers = [...this.#pointModel.offers];
-    this.#destinations = [...this.#pointModel.destinations];
 
     this.#renderApp();
   }
 
   #renderPoint(point, offers, destinations) {
     const pointsListItemComponent = new PointsListItemView();
+
     const escKeyDownHandler = (evt) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
@@ -36,6 +32,7 @@ export default class AppPresenter {
         document.removeEventListener('keydown', escKeyDownHandler);
       }
     };
+
     const pointComponent = new PointView({
       point,
       offers,
@@ -45,6 +42,7 @@ export default class AppPresenter {
         document.addEventListener('keydown', escKeyDownHandler);
       }
     });
+
     const pointEditComponent = new PointEditView({
       point,
       offers,
@@ -71,8 +69,8 @@ export default class AppPresenter {
     render(new SortView, this.#pointsListContainer);
     render(this.#pointsListComponent, this.#pointsListContainer);
 
-    for (let i = 1; i < this.#points.length; i++) {
-      this.#renderPoint(this.#points[i], this.#offers, this.#destinations);
-    }
+    this.#points.forEach((point) => {
+      this.#renderPoint(point, this.#pointModel.offers, this.#pointModel.destinations);
+    });
   }
 }
