@@ -3,7 +3,9 @@ import PointsListView from '../view/points-list-view.js';
 import PointsListItemView from '../view/points-list-item-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointView from '../view/point-view.js';
+import NoPointsView from '../view/no-points-view.js';
 import { render, replace } from '../framework/render.js';
+import { NoPointText } from '../const.js';
 
 export default class AppPresenter {
   #pointsListContainer = null;
@@ -66,6 +68,13 @@ export default class AppPresenter {
   }
 
   #renderApp() {
+
+    if (this.#points.length === 0) {
+      render(new NoPointsView(NoPointText.EVERYTHING), this.#pointsListContainer);
+
+      return;
+    }
+
     render(new SortView, this.#pointsListContainer);
     render(this.#pointsListComponent, this.#pointsListContainer);
 
