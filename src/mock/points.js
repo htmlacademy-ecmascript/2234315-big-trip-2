@@ -1,7 +1,7 @@
-import { POINTS_TYPES } from '../const';
-import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, generateUUID } from '../utils';
-import { mockDestinations } from './destinations';
-import { mockOffers } from './offers';
+import { POINTS_TYPES } from '../const.js';
+import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, generateUUID } from '../utils/utils.js';
+import { mockDestinations } from './destinations.js';
+import { mockOffers } from './offers.js';
 
 const getOffersIds = (type) => {
   const offersByType = mockOffers.find((offerByType) => offerByType.type === type);

@@ -26,4 +26,11 @@ const NoPointText = {
   PAST: 'There are no past events now',
 };
 
-export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT, NoPointText };
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PRESENT: 'present',
+  PAST: 'past',
+};
+
+export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT, NoPointText, FilterType };

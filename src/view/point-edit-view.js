@@ -1,6 +1,6 @@
 import { POINTS_TYPES, DATE_FORMAT } from '../const';
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeDate } from '../utils.js';
+import { humanizeDate } from '../utils/utils.js';
 
 function createBlankPoint(pointTypes) {
 
