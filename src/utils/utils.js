@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import isBetween from 'dayjs/plugin/isBetween';
 
 dayjs.extend(duration);
+dayjs.extend(isBetween);
 
 function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
@@ -54,4 +56,21 @@ function getDuration(startDate, endDate) {
   return dayjs(dayjs.duration({ minutes: dateDuration }).$ms).format(format);
 }
 
-export { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, generateUUID, humanizeDate, getDuration };
+const isFutureDate = (date) => dayjs().isBefore(dayjs(date));
+
+const isPresentDate = (dateFrom, dateTo) => dayjs().isBetween(dateFrom, dateTo);
+
+const isExpiredDate = (date) => dayjs().isAfter(dayjs(date));
+
+export {
+  getRandomArrayElement,
+  getRandomArrayElements,
+  getRandomInteger,
+  getRandomDate,
+  generateUUID,
+  humanizeDate,
+  getDuration,
+  isFutureDate,
+  isPresentDate,
+  isExpiredDate
+};

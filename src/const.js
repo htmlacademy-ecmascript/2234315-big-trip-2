@@ -19,4 +19,18 @@ const DATE_FORMAT = {
   fullDate: 'DD/MM/YY HH:mm'
 };
 
-export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT };
+const NoPointText = {
+  EVERYTHING: 'Click New Event to create your first point',
+  FUTURE: 'There are no future events now',
+  PRESENT: 'There are no present events now',
+  PAST: 'There are no past events now',
+};
+
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PRESENT: 'present',
+  PAST: 'past',
+};
+
+export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT, NoPointText, FilterType };

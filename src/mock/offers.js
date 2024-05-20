@@ -1,4 +1,4 @@
-import {getRandomInteger} from '../utils';
+import { getRandomInteger } from '../utils/utils.js';
 
 const mockOffers = [
   {
@@ -178,4 +178,4 @@ const mockOffers = [
 ];
 
 
-export {mockOffers};
+export { mockOffers };

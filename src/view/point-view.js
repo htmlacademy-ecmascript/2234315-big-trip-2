@@ -1,6 +1,6 @@
-import { DATE_FORMAT } from '../const';
+import { DATE_FORMAT } from '../const.js';
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeDate, getDuration } from '../utils.js';
+import { humanizeDate, getDuration } from '../utils/utils.js';
 
 function createOfferTemplate(offer) {
   const { title, price } = offer;
