@@ -30,11 +30,6 @@ function getRandomInteger(max) {
 
 const getRandomDate = (start, end) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
-function generateUUID() {
-  const hex = () => Math.floor(Math.random() * 0x10000).toString(16).padStart(4, '0');
-  return `${hex()}-${hex()}-${hex()}-${hex()}-${hex()}${hex()}`;
-}
-
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
 }
@@ -62,15 +57,19 @@ const isPresentDate = (dateFrom, dateTo) => dayjs().isBetween(dateFrom, dateTo);
 
 const isExpiredDate = (date) => dayjs().isAfter(dayjs(date));
 
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
+}
+
 export {
   getRandomArrayElement,
   getRandomArrayElements,
   getRandomInteger,
   getRandomDate,
-  generateUUID,
   humanizeDate,
   getDuration,
   isFutureDate,
   isPresentDate,
-  isExpiredDate
+  isExpiredDate,
+  updateItem
 };

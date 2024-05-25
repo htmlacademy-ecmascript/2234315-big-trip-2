@@ -1,5 +1,6 @@
+import { nanoid } from 'nanoid';
 import { POINTS_TYPES } from '../const.js';
-import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate, generateUUID } from '../utils/utils.js';
+import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate } from '../utils/utils.js';
 import { mockDestinations } from './destinations.js';
 import { mockOffers } from './offers.js';
 
@@ -15,7 +16,7 @@ const getRandomPoint = () => {
   const pointType = getRandomArrayElement(POINTS_TYPES);
 
   return ({
-    id: generateUUID(),
+    id: nanoid(),
     basePrice: getRandomInteger(500),
     dateFrom: getRandomDate(new Date(2024, 4, 1), new Date(2024, 4, 5)),
     dateTo: getRandomDate(new Date(2024, 4, 5), new Date(2024, 4, 15)),

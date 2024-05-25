@@ -4,12 +4,14 @@ import NoPointsView from '../view/no-points-view.js';
 import { render } from '../framework/render.js';
 import { NoPointText } from '../const.js';
 import PointPresenter from './point-presenter.js';
+import { updateItem } from '../utils/utils.js';
 
 export default class AppPresenter {
   #pointsListContainer = null;
   #pointModel = null;
   #pointsListComponent = new PointsListView();
   #points = [];
+  #pointPresenters = new Map();
 
   constructor({ pointsListContainer, pointModel }) {
     this.#pointsListContainer = pointsListContainer;
@@ -25,10 +27,17 @@ export default class AppPresenter {
   #renderPoint(point, offers, destinations) {
     const pointPresenter = new PointPresenter({
       pointsListContainer: this.#pointsListComponent.element,
+      onDataChange: this.#handlePointChange
     });
 
     pointPresenter.init(point, offers, destinations);
+    this.#pointPresenters.set(point.id, pointPresenter);
   }
+
+  #handlePointChange = (updatedPoint) => {
+    this.#points = updateItem(this.#points, updatedPoint);
+    this.#pointPresenters.get(updatedPoint.id).init(updatedPoint, this.#pointModel.offers, this.#pointModel.destinations);
+  };
 
   #renderNoPoints() {
     render(new NoPointsView(NoPointText.EVERYTHING), this.#pointsListContainer);
@@ -36,6 +45,11 @@ export default class AppPresenter {
 
   #renderSort() {
     render(new SortView, this.#pointsListContainer);
+  }
+
+  #clearPointList() {
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
+    this.#pointPresenters.clear();
   }
 
   #renderPointList() {
