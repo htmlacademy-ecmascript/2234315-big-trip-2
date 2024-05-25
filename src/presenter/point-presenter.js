@@ -2,21 +2,27 @@ import { render, replace, remove } from '../framework/render.js';
 import PointsListItemView from '../view/points-list-item-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointView from '../view/point-view.js';
+import { PointMode } from '../const.js';
+
 
 export default class PointPresenter {
   #pointsListContainer = null;
-  #handleDataChange = null;
   #pointsListItemComponent = null;
   #pointEditComponent = null;
   #pointComponent = null;
 
+  #handleDataChange = null;
+  #handleModeChange = null;
+
   #point = null;
   #offers = [];
   #destinations = [];
+  #mode = PointMode.DEFAULT;
 
-  constructor({ pointsListContainer, onDataChange }) {
+  constructor({ pointsListContainer, onDataChange, onModeChange }) {
     this.#pointsListContainer = pointsListContainer;
     this.#handleDataChange = onDataChange;
+    this.#handleModeChange = onModeChange;
   }
 
   init(point, offers, destinations) {
@@ -51,11 +57,11 @@ export default class PointPresenter {
       return;
     }
 
-    if (this.#pointsListContainer.contains(prevPointComponent.element)) {
+    if (this.#mode === PointMode.DEFAULT) {
       replace(this.#pointComponent, prevPointComponent);
     }
 
-    if (this.#pointsListContainer.contains(prevPointEditComponent.element)) {
+    if (this.#mode === PointMode.EDITING) {
       replace(this.#pointEditComponent, prevPointEditComponent);
     }
 
@@ -69,14 +75,23 @@ export default class PointPresenter {
     remove(this.#pointEditComponent);
   }
 
+  resetView() {
+    if (this.#mode !== PointMode.DEFAULT) {
+      this.#replaceFormToPoint();
+    }
+  }
+
   #replacePointToForm() {
     replace(this.#pointEditComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
+    this.#handleModeChange();
+    this.#mode = PointMode.EDITING;
   }
 
   #replaceFormToPoint() {
     replace(this.#pointComponent, this.#pointEditComponent);
     document.removeEventListener('keydown', this.#escKeyDownHandler);
+    this.#mode = PointMode.DEFAULT;
   }
 
   #escKeyDownHandler = (evt) => {

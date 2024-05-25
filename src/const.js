@@ -33,4 +33,9 @@ const FilterType = {
   PAST: 'past',
 };
 
-export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT, NoPointText, FilterType };
+const PointMode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING',
+};
+
+export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT, NoPointText, FilterType, PointMode };
