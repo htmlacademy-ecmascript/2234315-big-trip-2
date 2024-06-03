@@ -2,13 +2,15 @@ import SortView from '../view/sort-view.js';
 import PointsListView from '../view/points-list-view.js';
 import NoPointsView from '../view/no-points-view.js';
 import { render } from '../framework/render.js';
-import { NoPointText } from '../const.js';
+import { NoPointText, SortType } from '../const.js';
 import PointPresenter from './point-presenter.js';
 import { updateItem } from '../utils/utils.js';
+import { sortByDay, sortByTime, sortByPrice } from '../utils/sorter.js';
 
 export default class AppPresenter {
   #pointsListContainer = null;
   #pointModel = null;
+  #sortComponent = null;
   #pointsListComponent = new PointsListView();
   #points = [];
   #pointPresenters = new Map();
@@ -20,6 +22,7 @@ export default class AppPresenter {
 
   init() {
     this.#points = [...this.#pointModel.points];
+    this.#sortPoints();
 
     this.#renderApp();
   }
@@ -45,11 +48,7 @@ export default class AppPresenter {
   }
 
   #renderNoPoints() {
-    render(new NoPointsView(NoPointText.EVERYTHING), this.#pointsListContainer);
-  }
-
-  #renderSort() {
-    render(new SortView, this.#pointsListContainer);
+    render(new NoPointsView({ message: NoPointText.EVERYTHING }), this.#pointsListContainer);
   }
 
   #clearPointList() {
@@ -63,6 +62,33 @@ export default class AppPresenter {
     this.#points.forEach((point) => {
       this.#renderPoint(point, this.#pointModel.offers, this.#pointModel.destinations);
     });
+  }
+
+  #sortPoints(sortType) {
+    switch (sortType) {
+      case SortType.TIME:
+        this.#points.sort(sortByTime);
+        break;
+      case SortType.PRICE:
+        this.#points.sort(sortByPrice);
+        break;
+      default:
+        this.#points.sort(sortByDay);
+    }
+  }
+
+  #handleSortTypeChange = (sortType) => {
+    this.#sortPoints(sortType);
+    this.#clearPointList();
+    this.#renderPointList();
+  };
+
+  #renderSort() {
+    this.#sortComponent = new SortView({
+      onSortTypeChange: this.#handleSortTypeChange,
+    });
+
+    render(this.#sortComponent, this.#pointsListContainer);
   }
 
   #renderApp() {

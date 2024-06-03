@@ -1,4 +1,4 @@
-import { POINTS_TYPES, DATE_FORMAT } from '../const';
+import { POINT_TYPES, DATE_FORMAT } from '../const';
 import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils/utils.js';
 
@@ -104,7 +104,7 @@ function createDestinationTemplate(destination) {
 }
 
 function createPointEditTemplate(point, offers, destinations) {
-  const currentPoint = point || createBlankPoint(POINTS_TYPES);
+  const currentPoint = point || createBlankPoint(POINT_TYPES);
   const { id, dateFrom, dateTo, basePrice, type } = currentPoint;
   const pointDestination = destinations.find((destination) => destination.id === currentPoint.destination);
   const { name } = pointDestination || {};
@@ -122,7 +122,7 @@ function createPointEditTemplate(point, offers, destinations) {
           <div class="event__type-list">
             <fieldset class="event__type-group">
               <legend class="visually-hidden">Event type</legend>
-              ${POINTS_TYPES.map((pointType) => createPointTypeTemplate(pointType, type, id)).join('')}
+              ${POINT_TYPES.map((pointType) => createPointTypeTemplate(pointType, type, id)).join('')}
             </fieldset>
           </div>
         </div>
