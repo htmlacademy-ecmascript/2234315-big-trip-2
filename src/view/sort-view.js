@@ -2,7 +2,6 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { SortType, DISABLED_SORT_TYPES } from '../const.js';
 
 function createSortItemTemplate(type, isChecked) {
-
   return (
     `<div class="trip-sort__item  trip-sort__item--${type}">
       <input

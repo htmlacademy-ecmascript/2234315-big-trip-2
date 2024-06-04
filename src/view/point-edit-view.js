@@ -3,7 +3,6 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils/utils.js';
 
 function createBlankPoint(pointTypes) {
-
   return {
     id: '',
     basePrice: '',
@@ -17,7 +16,6 @@ function createBlankPoint(pointTypes) {
 }
 
 function createPointTypeTemplate(pointType, currentPointType, currentPointId) {
-
   return (
     `<div class="event__type-item">
         <input id="event-type-${pointType}-${currentPointId}"
@@ -73,7 +71,6 @@ function createOffersTemplate(allOffers, currentPointType, selectedOffers) {
 }
 
 function createPicturesTemplate(pictures) {
-
   if (!pictures.length) {
     return '';
   }
@@ -88,7 +85,6 @@ function createPicturesTemplate(pictures) {
 }
 
 function createDestinationTemplate(destination) {
-
   if (!destination) {
     return '';
   }

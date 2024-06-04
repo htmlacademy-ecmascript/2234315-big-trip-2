@@ -22,8 +22,7 @@ export default class AppPresenter {
 
   init() {
     this.#points = [...this.#pointModel.points];
-    this.#sortPoints();
-
+    this.#sortPoints(SortType.DAY);
     this.#renderApp();
   }
 
@@ -66,6 +65,9 @@ export default class AppPresenter {
 
   #sortPoints(sortType) {
     switch (sortType) {
+      case SortType.DAY:
+        this.#points.sort(sortByDay);
+        break;
       case SortType.TIME:
         this.#points.sort(sortByTime);
         break;
@@ -73,7 +75,7 @@ export default class AppPresenter {
         this.#points.sort(sortByPrice);
         break;
       default:
-        this.#points.sort(sortByDay);
+        throw new Error(`Unhandled sort type: '${sortType}'!`);
     }
   }
 
@@ -92,7 +94,6 @@ export default class AppPresenter {
   }
 
   #renderApp() {
-
     if (this.#points.length === 0) {
       this.#renderNoPoints();
 
