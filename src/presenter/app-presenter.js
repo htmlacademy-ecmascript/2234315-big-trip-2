@@ -14,6 +14,7 @@ export default class AppPresenter {
   #pointsListComponent = new PointsListView();
   #points = [];
   #pointPresenters = new Map();
+  #currentSortType = SortType.DAY;
 
   constructor({ pointsListContainer, pointModel }) {
     this.#pointsListContainer = pointsListContainer;
@@ -22,7 +23,7 @@ export default class AppPresenter {
 
   init() {
     this.#points = [...this.#pointModel.points];
-    this.#sortPoints(SortType.DAY);
+    this.#sortPoints(this.#currentSortType);
     this.#renderApp();
   }
 
@@ -87,6 +88,7 @@ export default class AppPresenter {
 
   #renderSort() {
     this.#sortComponent = new SortView({
+      currentSortType: this.#currentSortType,
       onSortTypeChange: this.#handleSortTypeChange,
     });
 
