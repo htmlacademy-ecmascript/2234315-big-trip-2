@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { POINTS_TYPES } from '../const.js';
+import { POINT_TYPES } from '../const.js';
 import { getRandomArrayElement, getRandomArrayElements, getRandomInteger, getRandomDate } from '../utils/utils.js';
 import { mockDestinations } from './destinations.js';
 import { mockOffers } from './offers.js';
@@ -13,7 +13,7 @@ const getOffersIds = (type) => {
 };
 
 const getRandomPoint = () => {
-  const pointType = getRandomArrayElement(POINTS_TYPES);
+  const pointType = getRandomArrayElement(POINT_TYPES);
 
   return ({
     id: nanoid(),

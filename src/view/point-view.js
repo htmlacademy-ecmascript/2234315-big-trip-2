@@ -4,6 +4,7 @@ import { humanizeDate, getDuration } from '../utils/utils.js';
 
 function createOfferTemplate(offer) {
   const { title, price } = offer;
+
   return (
     `<li class="event__offer">
         <span class="event__offer-title">${title}</span>

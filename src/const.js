@@ -1,6 +1,6 @@
 const POINTS_QUANTITY = 4;
 
-const POINTS_TYPES = [
+const POINT_TYPES = [
   'taxi',
   'bus',
   'train',
@@ -33,9 +33,31 @@ const FilterType = {
   PAST: 'past',
 };
 
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFERS: 'offers',
+};
+
+const DISABLED_SORT_TYPES = [
+  SortType.EVENT,
+  SortType.OFFERS
+];
+
 const PointMode = {
   DEFAULT: 'DEFAULT',
   EDITING: 'EDITING',
 };
 
-export { POINTS_QUANTITY, POINTS_TYPES, DATE_FORMAT, NoPointText, FilterType, PointMode };
+export {
+  POINTS_QUANTITY,
+  POINT_TYPES,
+  DATE_FORMAT,
+  NoPointText,
+  FilterType,
+  SortType,
+  DISABLED_SORT_TYPES,
+  PointMode
+};

@@ -2,16 +2,19 @@ import SortView from '../view/sort-view.js';
 import PointsListView from '../view/points-list-view.js';
 import NoPointsView from '../view/no-points-view.js';
 import { render } from '../framework/render.js';
-import { NoPointText } from '../const.js';
+import { NoPointText, SortType } from '../const.js';
 import PointPresenter from './point-presenter.js';
 import { updateItem } from '../utils/utils.js';
+import { sortByDay, sortByTime, sortByPrice } from '../utils/sorter.js';
 
 export default class AppPresenter {
   #pointsListContainer = null;
   #pointModel = null;
+  #sortComponent = null;
   #pointsListComponent = new PointsListView();
   #points = [];
   #pointPresenters = new Map();
+  #currentSortType = SortType.DAY;
 
   constructor({ pointsListContainer, pointModel }) {
     this.#pointsListContainer = pointsListContainer;
@@ -20,7 +23,7 @@ export default class AppPresenter {
 
   init() {
     this.#points = [...this.#pointModel.points];
-
+    this.#sortPoints(this.#currentSortType);
     this.#renderApp();
   }
 
@@ -45,11 +48,7 @@ export default class AppPresenter {
   }
 
   #renderNoPoints() {
-    render(new NoPointsView(NoPointText.EVERYTHING), this.#pointsListContainer);
-  }
-
-  #renderSort() {
-    render(new SortView, this.#pointsListContainer);
+    render(new NoPointsView({ message: NoPointText.EVERYTHING }), this.#pointsListContainer);
   }
 
   #clearPointList() {
@@ -65,8 +64,38 @@ export default class AppPresenter {
     });
   }
 
-  #renderApp() {
+  #sortPoints(sortType) {
+    switch (sortType) {
+      case SortType.DAY:
+        this.#points.sort(sortByDay);
+        break;
+      case SortType.TIME:
+        this.#points.sort(sortByTime);
+        break;
+      case SortType.PRICE:
+        this.#points.sort(sortByPrice);
+        break;
+      default:
+        throw new Error(`Unhandled sort type: '${sortType}'!`);
+    }
+  }
 
+  #handleSortTypeChange = (sortType) => {
+    this.#sortPoints(sortType);
+    this.#clearPointList();
+    this.#renderPointList();
+  };
+
+  #renderSort() {
+    this.#sortComponent = new SortView({
+      currentSortType: this.#currentSortType,
+      onSortTypeChange: this.#handleSortTypeChange,
+    });
+
+    render(this.#sortComponent, this.#pointsListContainer);
+  }
+
+  #renderApp() {
     if (this.#points.length === 0) {
       this.#renderNoPoints();
 
