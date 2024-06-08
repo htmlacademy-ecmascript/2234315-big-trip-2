@@ -210,12 +210,17 @@ export default class PointEditView extends AbstractStatefulView {
   }
 
   _restoreHandlers() {
+    const pointOffers = this.#offers.find((offer) => offer.type === this._state.type).offers;
+
     this.element.addEventListener('submit', this.#formSubmitHandler);
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formCloseHandler);
     this.element.querySelector('.event__type-group').addEventListener('change', this.#pointTypeChangeHandler);
     this.element.querySelector('.event__input--destination').addEventListener('change', this.#destinationChangeHandler);
     this.element.querySelector('.event__input--price').addEventListener('change', this.#priceChangeHandler);
-    this.element.querySelector('.event__available-offers').addEventListener('change', this.#offerSelectHandler);
+
+    if (pointOffers.length !== 0) {
+      this.element.querySelector('.event__available-offers').addEventListener('change', this.#offerSelectHandler);
+    }
   }
 
   #formSubmitHandler = (evt) => {
@@ -237,6 +242,13 @@ export default class PointEditView extends AbstractStatefulView {
 
   #destinationChangeHandler = (evt) => {
     const selectedDestination = this.#destinations.find((destination) => destination.name === evt.target.value);
+
+    if (!selectedDestination) {
+      evt.target.value = '';
+
+      return;
+    }
+
     this.updateElement({
       destination: selectedDestination.id
     });
