@@ -61,6 +61,10 @@ function updateItem(items, update) {
   return items.map((item) => item.id === update.id ? update : item);
 }
 
+function findOffersByType(allOffers, type) {
+  return allOffers.find((offer) => offer.type === type).offers;
+}
+
 export {
   getRandomArrayElement,
   getRandomArrayElements,
@@ -71,5 +75,6 @@ export {
   isFutureDate,
   isPresentDate,
   isExpiredDate,
-  updateItem
+  updateItem,
+  findOffersByType
 };

@@ -1,6 +1,6 @@
 import { POINT_TYPES, DATE_FORMAT } from '../const';
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
-import { humanizeDate } from '../utils/utils.js';
+import { humanizeDate, findOffersByType } from '../utils/utils.js';
 
 function createBlankPoint(pointTypes) {
   return {
@@ -40,6 +40,7 @@ function createOfferTemplate(offer, selectedOffers) {
     `<div class="event__offer-selector">
       <input class="event__offer-checkbox visually-hidden"
         id="event-offer-${id}"
+        data-id="${id}"
         type="checkbox"
         name="event-offer-${formatOfferTitle(title)}"
         ${offerCheckedAttribute}>
@@ -53,7 +54,7 @@ function createOfferTemplate(offer, selectedOffers) {
 }
 
 function createOffersTemplate(allOffers, currentPointType, selectedOffers) {
-  const pointTypeOffers = allOffers.find((offer) => offer.type === currentPointType).offers;
+  const pointTypeOffers = findOffersByType(allOffers, currentPointType);
 
   if (!pointTypeOffers.length) {
     return '';
@@ -210,7 +211,7 @@ export default class PointEditView extends AbstractStatefulView {
   }
 
   _restoreHandlers() {
-    const pointOffers = this.#offers.find((offer) => offer.type === this._state.type).offers;
+    const pointOffers = findOffersByType(this.#offers, this._state.type);
 
     this.element.addEventListener('submit', this.#formSubmitHandler);
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formCloseHandler);
@@ -219,7 +220,7 @@ export default class PointEditView extends AbstractStatefulView {
     this.element.querySelector('.event__input--price').addEventListener('change', this.#priceChangeHandler);
 
     if (pointOffers.length !== 0) {
-      this.element.querySelector('.event__available-offers').addEventListener('change', this.#offerSelectHandler);
+      this.element.querySelector('.event__available-offers').addEventListener('change', this.#offerChangeHandler);
     }
   }
 
@@ -260,8 +261,17 @@ export default class PointEditView extends AbstractStatefulView {
     });
   };
 
-  #offerSelectHandler = () => {
-    const selectedOffers = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'), (offer) => offer.id.split('-')[2]);
+  #offerChangeHandler = (evt) => {
+    const offerId = evt.target.dataset.id;
+    const selectedOffers = [...this._state.offers];
+    const index = selectedOffers.indexOf(offerId);
+
+    if (index > -1) {
+      selectedOffers.splice(index, 1);
+    } else {
+      selectedOffers.push(offerId);
+    }
+
     this._setState({
       offers: selectedOffers
     });
