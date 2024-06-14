@@ -35,9 +35,10 @@ function humanizeDate(date, format) {
 }
 
 function getDuration(startDate, endDate) {
-  const dateDuration = dayjs(endDate).diff(startDate, 'minute');
   const MIN_IN_HOUR = 60;
   const MIN_IN_DAY = 1440;
+  const dateDuration = dayjs(endDate).diff(startDate, 'minute');
+  const durationInMsec = dayjs.duration({ minutes: dateDuration }).$ms;
   let format;
 
   if (dateDuration < MIN_IN_HOUR) {
@@ -48,7 +49,7 @@ function getDuration(startDate, endDate) {
     format = 'DD[D] HH[H] mm[M]';
   }
 
-  return dayjs(dayjs.duration({ minutes: dateDuration }).$ms).format(format);
+  return dayjs.duration(durationInMsec).format(format);
 }
 
 const isFutureDate = (date) => dayjs().isBefore(dayjs(date));
