@@ -58,10 +58,6 @@ const isPresentDate = (dateFrom, dateTo) => dayjs().isBetween(dateFrom, dateTo);
 
 const isExpiredDate = (date) => dayjs().isAfter(dayjs(date));
 
-function updateItem(items, update) {
-  return items.map((item) => item.id === update.id ? update : item);
-}
-
 function findOffersByType(allOffers, type) {
   return allOffers.find((offer) => offer.type === type).offers;
 }
@@ -76,6 +72,5 @@ export {
   isFutureDate,
   isPresentDate,
   isExpiredDate,
-  updateItem,
   findOffersByType
 };
