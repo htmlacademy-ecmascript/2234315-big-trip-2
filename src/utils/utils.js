@@ -37,16 +37,21 @@ function humanizeDate(date, format) {
 function getDuration(startDate, endDate) {
   const MIN_IN_HOUR = 60;
   const MIN_IN_DAY = 1440;
-  const dateDuration = dayjs(endDate).diff(startDate, 'minute');
-  const durationInMsec = dayjs.duration({ minutes: dateDuration }).$ms;
+  const startDateTime = dayjs(startDate);
+  const endDateTime = dayjs(endDate);
+  const durationInMinutes = endDateTime.diff(startDateTime, 'minute');
+  const durationInMsec = endDateTime.diff(startDateTime, 'millisecond');
   let format;
 
-  if (dateDuration < MIN_IN_HOUR) {
+  if (durationInMinutes < MIN_IN_HOUR) {
     format = 'mm[M]';
-  } else if (dateDuration < MIN_IN_DAY) {
+  } else if (durationInMinutes < MIN_IN_DAY) {
     format = 'HH[H] mm[M]';
   } else {
-    format = 'DD[D] HH[H] mm[M]';
+    const days = endDateTime.diff(startDateTime, 'day');
+    const hours = endDateTime.diff(startDateTime, 'hour') % 24;
+    const minutes = endDateTime.diff(startDateTime, 'minute') % 60;
+    format = `${String(days).padStart(2, '0')}[D] ${String(hours).padStart(2, '0')}[H] ${String(minutes).padStart(2, '0')}[M]`;
   }
 
   return dayjs.duration(durationInMsec).format(format);
