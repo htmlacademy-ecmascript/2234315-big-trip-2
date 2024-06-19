@@ -35,7 +35,8 @@ export default class NewPointPresenter {
       destinations: this.#destinations,
       onFormSubmit: this.#handleFormSubmit,
       onFormClose: this.#handleFormClose,
-      onDeleteClick: this.#handleDeleteClick
+      onDeleteClick: this.#handleDeleteClick,
+      isEditView: false,
     });
 
     render(this.#pointsListItemComponent, this.#pointsListComponent.element, RenderPosition.AFTERBEGIN);

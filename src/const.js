@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 const POINTS_QUANTITY = 4;
 
 const POINT_TYPES = [
@@ -65,8 +67,8 @@ const UpdateType = {
 
 const BLANK_POINT = {
   basePrice: 0,
-  dateFrom: '',
-  dateTo: '',
+  dateFrom: dayjs().$d,
+  dateTo: dayjs().add(1, 'days').$d,
   destination: '',
   isFavourite: false,
   offers: [],

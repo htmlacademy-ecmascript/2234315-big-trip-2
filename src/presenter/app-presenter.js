@@ -59,6 +59,14 @@ export default class AppPresenter {
     }
   }
 
+  get offers() {
+    return this.#appModel.offers;
+  }
+
+  get destinations() {
+    return this.#appModel.destinations;
+  }
+
   init() {
     this.#renderNewPointButton();
     this.#renderApp();
@@ -67,7 +75,7 @@ export default class AppPresenter {
   #createPoint() {
     this.#currentSortType = SortType.DAY;
     this.#filterModel.setFilter(UpdateType.MAJOR, FilterType.EVERYTHING);
-    this.#newPointPresenter.init(this.#appModel.offers, this.#appModel.destinations);
+    this.#newPointPresenter.init(this.offers, this.destinations);
 
     if (this.#noPointsComponent) {
       remove(this.#noPointsComponent);
@@ -93,7 +101,7 @@ export default class AppPresenter {
   #handleModelEvent = (updateType, data) => {
     switch (updateType) {
       case UpdateType.PATCH:
-        this.#pointPresenters.get(data.id).init(data, this.#appModel.offers, this.#appModel.destinations);
+        this.#pointPresenters.get(data.id).init(data, this.offers, this.destinations);
         break;
       case UpdateType.MINOR:
         this.#clearApp();
@@ -123,11 +131,11 @@ export default class AppPresenter {
 
   #handleNewPointButtonClick = () => {
     this.#createPoint();
-    this.#newPointButtonComponent.element.disabled = true;
+    this.#newPointButtonComponent.disable();
   };
 
   #handleNewPointFormClose = () => {
-    this.#newPointButtonComponent.element.disabled = false;
+    this.#newPointButtonComponent.enable();
   };
 
   #renderPoint(point, offers, destinations) {
@@ -153,7 +161,7 @@ export default class AppPresenter {
     render(this.#pointsListComponent, this.#pointsListContainer);
 
     this.points.forEach((point) => {
-      this.#renderPoint(point, this.#appModel.offers, this.#appModel.destinations);
+      this.#renderPoint(point, this.offers, this.destinations);
     });
   }
 
