@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 const POINTS_QUANTITY = 4;
 
 const POINT_TYPES = [
@@ -19,18 +21,18 @@ const DATE_FORMAT = {
   fullDate: 'DD/MM/YY HH:mm'
 };
 
-const NoPointText = {
-  EVERYTHING: 'Click New Event to create your first point',
-  FUTURE: 'There are no future events now',
-  PRESENT: 'There are no present events now',
-  PAST: 'There are no past events now',
-};
-
 const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
   PRESENT: 'present',
   PAST: 'past',
+};
+
+const NoPointsTextType = {
+  [FilterType.EVERYTHING]: 'Click New Event to create your first point',
+  [FilterType.FUTURE]: 'There are no future events now',
+  [FilterType.PRESENT]: 'There are no present events now',
+  [FilterType.PAST]: 'There are no past events now',
 };
 
 const SortType = {
@@ -51,13 +53,38 @@ const PointMode = {
   EDITING: 'EDITING',
 };
 
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  ADD_POINT: 'ADD_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+};
+
+const BLANK_POINT = {
+  basePrice: 0,
+  dateFrom: dayjs().$d,
+  dateTo: dayjs().add(1, 'days').$d,
+  destination: '',
+  isFavourite: false,
+  offers: [],
+  type: POINT_TYPES[5],
+};
+
 export {
   POINTS_QUANTITY,
   POINT_TYPES,
   DATE_FORMAT,
-  NoPointText,
   FilterType,
+  NoPointsTextType,
   SortType,
   DISABLED_SORT_TYPES,
-  PointMode
+  PointMode,
+  UserAction,
+  UpdateType,
+  BLANK_POINT
 };

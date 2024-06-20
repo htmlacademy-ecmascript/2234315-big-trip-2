@@ -18,8 +18,8 @@ const getRandomPoint = () => {
   return ({
     id: nanoid(),
     basePrice: getRandomInteger(500),
-    dateFrom: getRandomDate(new Date(2024, 4, 1), new Date(2024, 4, 5)),
-    dateTo: getRandomDate(new Date(2024, 4, 5), new Date(2024, 4, 15)),
+    dateFrom: getRandomDate(new Date(2024, 5, 15), new Date(2024, 5, 20)),
+    dateTo: getRandomDate(new Date(2024, 5, 20), new Date(2024, 5, 25)),
     destination: mockDestinations[getRandomInteger(mockDestinations.length)].id,
     isFavorite: !getRandomInteger(2),
     offers: getOffersIds(pointType),

@@ -19,7 +19,7 @@ function createPointTemplate(point, offers, destinations) {
   const pointTypeOffers = offers.find((offer) => offer.type === point.type).offers;
   const pointOffers = pointTypeOffers.filter((pointTypeOffer) => point.offers.includes(pointTypeOffer.id));
   const pointDestination = destinations.find((destination) => destination.id === point.destination);
-  const { name } = pointDestination;
+  const destinationName = pointDestination?.name || '';
 
   return (
     `<div class="event">
@@ -27,7 +27,7 @@ function createPointTemplate(point, offers, destinations) {
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
-      <h3 class="event__title">${type} ${name}</h3>
+      <h3 class="event__title">${type} ${destinationName}</h3>
       <div class="event__schedule">
         <p class="event__time">
           <time class="event__start-time" datetime="${dateFrom}">${humanizeDate(dateFrom, DATE_FORMAT.time)}</time>
