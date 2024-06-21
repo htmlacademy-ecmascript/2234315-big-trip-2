@@ -5,31 +5,6 @@ import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(duration);
 dayjs.extend(isBetween);
 
-function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function getRandomArrayElements(array, count) {
-  const arrayCopy = [...array];
-
-  if (array.length === 0 || count > array.length) {
-    return [];
-  }
-
-  for (let i = arrayCopy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
-  }
-
-  return arrayCopy.slice(0, count);
-}
-
-function getRandomInteger(max) {
-  return Math.floor(Math.random() * max);
-}
-
-const getRandomDate = (start, end) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
 }
@@ -68,10 +43,6 @@ function findOffersByType(allOffers, type) {
 }
 
 export {
-  getRandomArrayElement,
-  getRandomArrayElements,
-  getRandomInteger,
-  getRandomDate,
   humanizeDate,
   getDuration,
   isFutureDate,
