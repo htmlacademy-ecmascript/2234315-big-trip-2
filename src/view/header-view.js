@@ -19,7 +19,7 @@ function createHeaderTemplate(points, offers, destinations) {
     `<section class="trip-main__trip-info  trip-info">
       <div class="trip-info__main">
         <h1 class="trip-info__title">${tripDestinations.join('&nbsp;&mdash;&nbsp;')}</h1>
-        <p class="trip-info__dates">${humanizeDate(dateFrom, DATE_FORMAT.shortDate)}&nbsp;&mdash;&nbsp;${humanizeDate(dateTo, DATE_FORMAT.shortDate)}</p>
+        <p class="trip-info__dates">${humanizeDate(dateFrom, DATE_FORMAT.shortDateReverse)}&nbsp;&mdash;&nbsp;${humanizeDate(dateTo, DATE_FORMAT.shortDateReverse)}</p>
       </div>
 
       <p class="trip-info__cost">

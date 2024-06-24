@@ -32,6 +32,7 @@ export default class PointPresenter {
 
     const prevPointComponent = this.#pointComponent;
     const prevPointEditComponent = this.#pointEditComponent;
+    const prevPointsListItemComponent = this.#pointsListItemComponent;
 
     this.#pointsListItemComponent = new PointsListItemView();
 
@@ -71,6 +72,7 @@ export default class PointPresenter {
 
     remove(prevPointComponent);
     remove(prevPointEditComponent);
+    remove(prevPointsListItemComponent);
   }
 
   destroy() {

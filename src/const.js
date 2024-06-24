@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 const HEADER_DESTINATIONS_COUNT = 3;
 
 const POINT_TYPES = [
@@ -18,6 +16,7 @@ const DATE_FORMAT = {
   time: 'HH:mm',
   date: 'YYYY-MM-DD',
   shortDate: 'MMM DD',
+  shortDateReverse: 'DD MMM',
   fullDate: 'DD/MM/YY HH:mm'
 };
 
@@ -80,8 +79,8 @@ const TimeLimit = {
 
 const BLANK_POINT = {
   basePrice: 0,
-  dateFrom: dayjs().$d,
-  dateTo: dayjs().add(1, 'days').$d,
+  dateFrom: '',
+  dateTo: '',
   destination: '',
   isFavorite: false,
   offers: [],

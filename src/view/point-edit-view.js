@@ -178,19 +178,17 @@ function createPointEditTemplate(point, offers, destinations, isEditView) {
 
         <button
           class="event__save-btn  btn  btn--blue"
-          type="submit"
-          ${isDisabled ? 'disabled' : ''}>
+          type="submit">
           ${isSaving ? 'Saving...' : 'Save'}
         </button>
         <button
           class="event__reset-btn"
-          type="reset"
-          ${isDisabled ? 'disabled' : ''}>
+          type="reset">
           ${resetButtonText}
         </button>
 
         ${isEditView ? `
-        <button class="event__rollup-btn" type="button" ${isDisabled ? 'disabled' : ''}>
+        <button class="event__rollup-btn" type="button">
           <span class="visually-hidden">Open event</span>
         </button>` : ''}
 

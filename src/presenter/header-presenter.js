@@ -1,6 +1,5 @@
 import { render, replace, remove, RenderPosition } from '../framework/render.js';
 import HeaderView from '../view/header-view.js';
-import { UpdateType } from '../const.js';
 import { sortByDay } from '../utils/sorter.js';
 
 export default class HeaderPresenter {
@@ -31,6 +30,9 @@ export default class HeaderPresenter {
 
   init() {
     if (this.points.length === 0) {
+      remove(this.#headerComponent);
+      this.#headerComponent = null;
+
       return;
     }
 
