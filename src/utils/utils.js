@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import isBetween from 'dayjs/plugin/isBetween';
+import { HEADER_DESTINATIONS_COUNT } from '../const.js';
 
 dayjs.extend(duration);
 dayjs.extend(isBetween);
@@ -42,9 +43,20 @@ function findOffersByType(allOffers, type) {
   return allOffers.find((offer) => offer.type === type).offers;
 }
 
-function getTriDestinations(points, destinations) {
-  return points.map((point) => destinations.find((destination) => destination.id === point.destination));
-}
+const getTripTitle = (points, destinations) => {
+  const allDestinations = points.map((point) => destinations.find((destination) => destination.id === point.destination));
+  let tripDestinations = allDestinations.map((destination) => destination.name);
+
+  if (points.length > HEADER_DESTINATIONS_COUNT) {
+    tripDestinations = [
+      allDestinations[0].name,
+      '...',
+      allDestinations[points.length - 1].name
+    ];
+  }
+
+  return tripDestinations.join('&nbsp;&mdash;&nbsp;');
+};
 
 const getOffersCost = (selectedOffers, offers) => {
   const allOffers = offers.flatMap((offer) => offer.offers);
@@ -74,6 +86,6 @@ export {
   isPresentDate,
   isExpiredDate,
   findOffersByType,
-  getTriDestinations,
+  getTripTitle,
   getTripCost
 };

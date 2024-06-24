@@ -6,7 +6,7 @@ import FilterModel from './model/filter-model.js';
 import AppApiService from './app-api-service.js';
 
 const END_POINT = 'https://22.objects.htmlacademy.pro/big-trip';
-const AUTHORIZATION = 'Basic Bt19OpY93lBAq78m';
+const AUTHORIZATION = 'Basic Bt19OpY33lBAq78m';
 
 const headerWrapper = document.querySelector('.trip-main');
 const filterWrapper = document.querySelector('.trip-controls__filters');

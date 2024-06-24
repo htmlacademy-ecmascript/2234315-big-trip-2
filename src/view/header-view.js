@@ -1,24 +1,15 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeDate, getTriDestinations, getTripCost } from '../utils/utils.js';
-import { HEADER_DESTINATIONS_COUNT, DATE_FORMAT } from '../const.js';
+import { humanizeDate, getTripTitle, getTripCost } from '../utils/utils.js';
+import { DATE_FORMAT } from '../const.js';
 
 function createHeaderTemplate(points, offers, destinations) {
   const dateFrom = points[0].dateFrom;
   const dateTo = points[points.length - 1].dateTo;
-  let tripDestinations = getTriDestinations(points, destinations).map((destination) => destination.name);
-
-  if (points.length > HEADER_DESTINATIONS_COUNT) {
-    tripDestinations = [
-      getTriDestinations(points, destinations)[0].name,
-      '...',
-      getTriDestinations(points, destinations)[points.length - 1].name
-    ];
-  }
 
   return (
     `<section class="trip-main__trip-info  trip-info">
       <div class="trip-info__main">
-        <h1 class="trip-info__title">${tripDestinations.join('&nbsp;&mdash;&nbsp;')}</h1>
+        <h1 class="trip-info__title">${getTripTitle(points, destinations)}</h1>
         <p class="trip-info__dates">${humanizeDate(dateFrom, DATE_FORMAT.shortDateReverse)}&nbsp;&mdash;&nbsp;${humanizeDate(dateTo, DATE_FORMAT.shortDateReverse)}</p>
       </div>
 
