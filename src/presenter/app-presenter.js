@@ -165,12 +165,23 @@ export default class AppPresenter {
   }
 
   #handleNewPointButtonClick = () => {
+    if (this.points.length === 0) {
+      remove(this.#noPointsComponent);
+      render(this.#pointsListComponent, this.#pointsListContainer);
+    }
+
     this.#createPoint();
     this.#newPointButtonComponent.disable();
   };
 
   #handleNewPointFormClose = () => {
     this.#newPointButtonComponent.enable();
+
+    if (this.points.length === 0) {
+      remove(this.#pointsListComponent);
+
+      this.#renderNoPoints(this.#filterType);
+    }
   };
 
   #renderPoint(point, offers, destinations) {
