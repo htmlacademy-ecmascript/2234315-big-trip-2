@@ -6,7 +6,7 @@ export default class AppModel extends Observable {
   #points = [];
   #offers = [];
   #destinations = [];
-  isServerUnavailable = false;
+  isServerAvailable = true;
 
   constructor({ appApiService }) {
     super();
@@ -24,7 +24,7 @@ export default class AppModel extends Observable {
       this.#points = [];
       this.#offers = [];
       this.#destinations = [];
-      this.isServerUnavailable = true;
+      this.isServerAvailable = false;
     }
 
     this._notify(UpdateType.INIT);

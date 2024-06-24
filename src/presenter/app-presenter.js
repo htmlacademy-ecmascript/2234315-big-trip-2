@@ -245,7 +245,7 @@ export default class AppPresenter {
   }
 
   #renderApp() {
-    if (this.#appModel.isServerUnavailable) {
+    if (!this.#appModel.isServerAvailable) {
       this.#renderNoPoints(Loading.ERROR);
       this.#newPointButtonComponent.disable();
 
