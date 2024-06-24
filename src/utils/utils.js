@@ -42,11 +42,38 @@ function findOffersByType(allOffers, type) {
   return allOffers.find((offer) => offer.type === type).offers;
 }
 
+function getTriDestinations(points, destinations) {
+  return points.map((point) => destinations.find((destination) => destination.id === point.destination));
+}
+
+const getOffersCost = (selectedOffers, offers) => {
+  const allOffers = offers.flatMap((offer) => offer.offers);
+  const selectedOffersPrices = selectedOffers.map((selectedOffer) => allOffers.find((offer) => offer.id === selectedOffer).price);
+
+  return selectedOffersPrices.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+};
+
+const getTripCost = (points, offers) => {
+  const selectedOffers = points.flatMap((point) => point.offers);
+  const offersCost = selectedOffers.length === 0 ? 0 : getOffersCost(selectedOffers, offers);
+
+  const pointsPrices = points.map((point) => point.basePrice);
+  const pointsCost = pointsPrices.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+
+  return pointsCost + offersCost;
+};
+
 export {
   humanizeDate,
   getDuration,
   isFutureDate,
   isPresentDate,
   isExpiredDate,
-  findOffersByType
+  findOffersByType,
+  getTriDestinations,
+  getTripCost
 };

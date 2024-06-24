@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+const HEADER_DESTINATIONS_COUNT = 3;
+
 const POINT_TYPES = [
   'taxi',
   'bus',
@@ -87,6 +89,7 @@ const BLANK_POINT = {
 };
 
 export {
+  HEADER_DESTINATIONS_COUNT,
   POINT_TYPES,
   DATE_FORMAT,
   FilterType,

@@ -12,7 +12,7 @@ import { sortByDay, sortByTime, sortByPrice } from '../utils/sorter.js';
 
 export default class AppPresenter {
   #pointsListContainer = null;
-  #tripInfoWrapper = null;
+  #headerWrapper = null;
   #sortComponent = null;
   #noPointsComponent = null;
   #pointsListComponent = new PointsListView();
@@ -33,9 +33,9 @@ export default class AppPresenter {
 
   #isLoading = true;
 
-  constructor({ pointsListContainer, tripInfoWrapper, appModel, filterModel }) {
+  constructor({ pointsListContainer, headerWrapper, appModel, filterModel }) {
     this.#pointsListContainer = pointsListContainer;
-    this.#tripInfoWrapper = tripInfoWrapper;
+    this.#headerWrapper = headerWrapper;
     this.#appModel = appModel;
     this.#filterModel = filterModel;
 
@@ -161,7 +161,7 @@ export default class AppPresenter {
       onClick: this.#handleNewPointButtonClick
     });
 
-    render(this.#newPointButtonComponent, this.#tripInfoWrapper);
+    render(this.#newPointButtonComponent, this.#headerWrapper);
   }
 
   #handleNewPointButtonClick = () => {
