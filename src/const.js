@@ -1,6 +1,4 @@
-import dayjs from 'dayjs';
-
-const POINTS_QUANTITY = 4;
+const HEADER_DESTINATIONS_COUNT = 3;
 
 const POINT_TYPES = [
   'taxi',
@@ -18,6 +16,7 @@ const DATE_FORMAT = {
   time: 'HH:mm',
   date: 'YYYY-MM-DD',
   shortDate: 'MMM DD',
+  shortDateReverse: 'DD MMM',
   fullDate: 'DD/MM/YY HH:mm'
 };
 
@@ -28,11 +27,18 @@ const FilterType = {
   PAST: 'past',
 };
 
+const Loading = {
+  IN_PROGRESS: 'progress',
+  ERROR: 'error',
+};
+
 const NoPointsTextType = {
   [FilterType.EVERYTHING]: 'Click New Event to create your first point',
   [FilterType.FUTURE]: 'There are no future events now',
   [FilterType.PRESENT]: 'There are no present events now',
   [FilterType.PAST]: 'There are no past events now',
+  [Loading.IN_PROGRESS]: 'Loading...',
+  [Loading.ERROR]: 'Failed to load latest route information',
 };
 
 const SortType = {
@@ -63,28 +69,36 @@ const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
+  INIT: 'INIT',
+};
+
+const TimeLimit = {
+  LOWER_LIMIT: 350,
+  UPPER_LIMIT: 1000,
 };
 
 const BLANK_POINT = {
   basePrice: 0,
-  dateFrom: dayjs().$d,
-  dateTo: dayjs().add(1, 'days').$d,
+  dateFrom: '',
+  dateTo: '',
   destination: '',
-  isFavourite: false,
+  isFavorite: false,
   offers: [],
   type: POINT_TYPES[5],
 };
 
 export {
-  POINTS_QUANTITY,
+  HEADER_DESTINATIONS_COUNT,
   POINT_TYPES,
   DATE_FORMAT,
   FilterType,
+  Loading,
   NoPointsTextType,
   SortType,
   DISABLED_SORT_TYPES,
   PointMode,
   UserAction,
   UpdateType,
+  TimeLimit,
   BLANK_POINT
 };

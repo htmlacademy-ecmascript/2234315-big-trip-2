@@ -32,6 +32,7 @@ export default class PointPresenter {
 
     const prevPointComponent = this.#pointComponent;
     const prevPointEditComponent = this.#pointEditComponent;
+    const prevPointsListItemComponent = this.#pointsListItemComponent;
 
     this.#pointsListItemComponent = new PointsListItemView();
 
@@ -65,11 +66,13 @@ export default class PointPresenter {
     }
 
     if (this.#mode === PointMode.EDITING) {
-      replace(this.#pointEditComponent, prevPointEditComponent);
+      replace(this.#pointComponent, prevPointEditComponent);
+      this.#mode = PointMode.DEFAULT;
     }
 
     remove(prevPointComponent);
     remove(prevPointEditComponent);
+    remove(prevPointsListItemComponent);
   }
 
   destroy() {
@@ -85,6 +88,42 @@ export default class PointPresenter {
     }
   }
 
+  setSaving() {
+    if (this.#mode === PointMode.EDITING) {
+      this.#pointEditComponent.updateElement({
+        isDisabled: true,
+        isSaving: true,
+      });
+    }
+  }
+
+  setDeleting() {
+    if (this.#mode === PointMode.EDITING) {
+      this.#pointEditComponent.updateElement({
+        isDisabled: true,
+        isDeleting: true,
+      });
+    }
+  }
+
+  setAborting() {
+    if (this.#mode === PointMode.DEFAULT) {
+      this.#pointComponent.shake();
+
+      return;
+    }
+
+    const resetFormState = () => {
+      this.#pointEditComponent.updateElement({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false,
+      });
+    };
+
+    this.#pointEditComponent.shake(resetFormState);
+  }
+
   #replacePointToForm() {
     replace(this.#pointEditComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
@@ -93,6 +132,7 @@ export default class PointPresenter {
   }
 
   #replaceFormToPoint() {
+    this.#pointEditComponent.reset();
     replace(this.#pointComponent, this.#pointEditComponent);
     document.removeEventListener('keydown', this.#escKeyDownHandler);
     this.#mode = PointMode.DEFAULT;
@@ -113,7 +153,7 @@ export default class PointPresenter {
   #handleFavoriteClick = () => {
     this.#handleDataChange(
       UserAction.UPDATE_POINT,
-      UpdateType.PATCH,
+      UpdateType.MINOR,
       { ...this.#point, isFavorite: !this.#point.isFavorite },
     );
   };
@@ -129,7 +169,6 @@ export default class PointPresenter {
       isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
       point,
     );
-    this.#replaceFormToPoint();
   };
 
   #handleFormClose = () => {

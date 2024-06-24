@@ -5,31 +5,6 @@ import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(duration);
 dayjs.extend(isBetween);
 
-function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function getRandomArrayElements(array, count) {
-  const arrayCopy = [...array];
-
-  if (array.length === 0 || count > array.length) {
-    return [];
-  }
-
-  for (let i = arrayCopy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
-  }
-
-  return arrayCopy.slice(0, count);
-}
-
-function getRandomInteger(max) {
-  return Math.floor(Math.random() * max);
-}
-
-const getRandomDate = (start, end) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
 }
@@ -67,15 +42,38 @@ function findOffersByType(allOffers, type) {
   return allOffers.find((offer) => offer.type === type).offers;
 }
 
+function getTriDestinations(points, destinations) {
+  return points.map((point) => destinations.find((destination) => destination.id === point.destination));
+}
+
+const getOffersCost = (selectedOffers, offers) => {
+  const allOffers = offers.flatMap((offer) => offer.offers);
+  const selectedOffersPrices = selectedOffers.map((selectedOffer) => allOffers.find((offer) => offer.id === selectedOffer).price);
+
+  return selectedOffersPrices.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+};
+
+const getTripCost = (points, offers) => {
+  const selectedOffers = points.flatMap((point) => point.offers);
+  const offersCost = selectedOffers.length === 0 ? 0 : getOffersCost(selectedOffers, offers);
+
+  const pointsPrices = points.map((point) => point.basePrice);
+  const pointsCost = pointsPrices.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+
+  return pointsCost + offersCost;
+};
+
 export {
-  getRandomArrayElement,
-  getRandomArrayElements,
-  getRandomInteger,
-  getRandomDate,
   humanizeDate,
   getDuration,
   isFutureDate,
   isPresentDate,
   isExpiredDate,
-  findOffersByType
+  findOffersByType,
+  getTriDestinations,
+  getTripCost
 };
